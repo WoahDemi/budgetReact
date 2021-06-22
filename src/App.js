@@ -6,18 +6,11 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import axios from "axios";
 
-// import EditTran from "./Components/EditTran"
-// import ListAll from "./Components/ListAll";
-// import NewTran from "./Components/NewTran"
-// import ShowOne from "./Components/ShowOne"
-// import EditTran from "./Components/EditTran";
 
 //Pages
 
 import Index from "./Pages/Index";
-import Show from "./Pages/Show";
 import New from "./Pages/New";
-import Edit from "./Pages/Edit";
 
 import NavBar from "./Components/NavBar";
 
@@ -36,16 +29,7 @@ function App() {
       console.log(err);
     }
   };
-  const deleteTransaction = async (index) => {
-    try {
-      await axios.delete(`${API}/transactions/${index}`);
-      const dummyState = [...transactions];
-      dummyState.splice(index, 1);
-      setTransactions(dummyState);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
 
 
   const fetchTransactions = async () => {
@@ -77,7 +61,6 @@ function App() {
             <Route exact path="/">
               <h1>Welcome to your new Money Life!</h1>
             </Route>
-            <Route></Route>
           </Switch>
         </main>
       </Router>

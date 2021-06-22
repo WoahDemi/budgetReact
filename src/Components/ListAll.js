@@ -7,12 +7,17 @@ const API = apiURL();
 function List() {
    
 const[transactions, setTransactions] = useState([])
+const[total, setTotal] = useState(0)
     
 const fetchTransactions = async () => {
         try {
           const res = await axios.get(`${API}/transactions/`);
           setTransactions(res.data);
           console.log(transactions)
+//           transactions.forEach(transaction =>{
+// setTotal(...total + transaction.amount)
+//           })
+          console.log(total)
         } catch (err) {
           console.log(err);
         }

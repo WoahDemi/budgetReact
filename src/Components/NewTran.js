@@ -71,7 +71,7 @@ function NewTran({ addTransaction }) {
         <label htmlFor="amount">Amount:</label>
         <input
           id="amount"
-          value={transaction.amount}
+          value={Number(transaction.amount)}
           type="number"
           onChange={handleChange}
           placeholder="Amount"
