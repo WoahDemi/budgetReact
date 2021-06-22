@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
- //Dependencies
+//Dependencies
 
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -12,14 +12,12 @@ import axios from "axios";
 // import ShowOne from "./Components/ShowOne"
 // import EditTran from "./Components/EditTran";
 
-
 //Pages
 
-import Index from "./Pages/Index"
-import Show from "./Pages/Show"
-import New from "./Pages/New"
-import Edit from "./Pages/Edit"
-
+import Index from "./Pages/Index";
+import Show from "./Pages/Show";
+import New from "./Pages/New";
+import Edit from "./Pages/Edit";
 
 import NavBar from "./Components/NavBar";
 
@@ -49,22 +47,12 @@ function App() {
     }
   };
 
-  const updateTransaction = async (updatedTransaction, index) => {
-    try {
-      await axios.put(`${API}/transactions/${index}`, updatedTransaction);
-      const newTransactions = [...transactions];
-      newTransactions[index] = updatedTransaction;
-      setTransactions(newTransactions);
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const fetchTransactions = async () => {
     let res;
     try {
       res = await axios.get(`${API}/transactions`);
-      console.log(res.data)
+      console.log(res.data);
       setTransactions(res.data);
     } catch (err) {
       console.log(err);
@@ -76,16 +64,19 @@ function App() {
   }, []);
   return (
     <div className="App">
-      <h1>Welcome to your new Money Life!</h1>
       <Router>
         <NavBar />
         <main>
           <Switch>
-            <Route exact path="/transactions/:id">
-              <Edit updateTransaction={updateTransaction} />
+            <Route path="/transactions/new">
+              <New addTransaction={addTransaction} />
             </Route>
-            <Route></Route>
-            <Route></Route>
+            <Route path="/transactions">
+              <Index fetchTransactions={fetchTransactions}/>
+            </Route>
+            <Route exact path="/">
+              <h1>Welcome to your new Money Life!</h1>
+            </Route>
             <Route></Route>
           </Switch>
         </main>

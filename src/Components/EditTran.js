@@ -5,20 +5,24 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { apiURL } from '../util/apiURL';
 const API = apiURL();
 
-function EditTran({updateTransaction}) {
+function EditTran(props) {
   let { index } = useParams();
   let history = useHistory();
 
   const [transaction, setTransaction] = useState({
-    buyer: "",
+    from: "",
   date: "",
-  purchase: "",
+  name: "",
   amount: ""
   });
 
-  const handleChange = (event) => {
+  const handleTextChange = (event) => {
     setTransaction({ ...transaction, [event.target.id]: event.target.value });
   };
+
+//   const handleCheckboxChange = () => {
+//     setTransaction({ ...transaction, isFavorite: !transaction.isFavorite });
+//   };
 
   const fetchTransactions = async () => {
     try {
@@ -35,20 +39,21 @@ function EditTran({updateTransaction}) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await updateTransaction(transaction, index);
+    await props.updateBookmark(transaction, index);
     history.push(`/transactions/${index}`);
   };
 
   return (
     <div className="Edit">
       <form onSubmit={handleSubmit}>
-      <label htmlFor="amount">Buyer:</label>
-        <textarea
-          id="buyer"
-          name="buyer"
-          value={transaction.buyer}
-          onChange={handleChange}
-          placeholder="Who spent money?"
+        <label htmlFor="amount">Amount:</label>
+        <input
+          id="amount"
+          value={transaction.amount}
+          type="number"
+          onChange={handleTextChange}
+          placeholder="Amount"
+          required
         />
         <label htmlFor="date">Date:</label>
         <input
@@ -57,25 +62,17 @@ function EditTran({updateTransaction}) {
           name="date"
           value={transaction.date}
           placeholder="May 9.."
-          onChange={handleChange}
+          onChange={handleTextChange}
         />
+        
         <label htmlFor="purchase">Purchase:</label>
         <textarea
           id="purchase"
           name="purchase"
           value={transaction.purchase}
-          onChange={handleChange}
-          placeholder="What was paid for?"
+          onChange={handleTextChange}
+          placeholder="What was"
         />
-          <label htmlFor="amount">Amount:</label>
-          <input
-            id="amount"
-            value={transaction.amount}
-            type="number"
-            onChange={handleChange}
-            placeholder="Amount"
-            required
-          />
         <br />
 
         <input type="submit" />
