@@ -37,7 +37,7 @@ function NewTran({ addTransaction }) {
     event.preventDefault();
     await addTransaction(transaction, index);
     console.log(history)
-    history.push(`/transactions/${index}`);
+    history.push(`/transactions/`);
   };
 
   return (

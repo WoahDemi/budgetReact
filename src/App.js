@@ -30,22 +30,6 @@ function App() {
     }
   };
 
-
-
-  const fetchTransactions = async () => {
-    let res;
-    try {
-      res = await axios.get(`${API}/transactions`);
-      console.log(res.data);
-      setTransactions(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchTransactions();
-  }, []);
   return (
     <div className="App">
       <Router>
@@ -56,7 +40,7 @@ function App() {
               <New addTransaction={addTransaction} />
             </Route>
             <Route path="/transactions">
-              <Index fetchTransactions={fetchTransactions}/>
+              <Index/>
             </Route>
             <Route exact path="/">
               <h1>Welcome to your new Money Life!</h1>

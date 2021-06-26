@@ -4,8 +4,8 @@ function Index({ fetchTransactions }) {
   return (
     <div className="Index">
       <h2>All Transactions</h2>
-      <ListAll/>
+      <ListAll fetchTransactions={fetchTransactions} />
     </div>
   );
 }
-export default Index
+export default Index;
